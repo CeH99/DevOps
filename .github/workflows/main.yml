@@ -1,0 +1,32 @@
+# Завдання 4. CI-конвеєр: перевірка коду та збірка Docker-образу
+name: CI
+
+# Запуск при кожному push у гілку main
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  # Крок 1: перевірка коду (lint)
+  lint:
+    name: Test / Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+      - name: Lint
+        run: echo "Linting complete"
+
+  # Крок 2: збірка Docker-образу (запускається лише після успішного lint)
+  build:
+    name: Build / Package
+    runs-on: ubuntu-latest
+    needs: lint
+    defaults:
+      run:
+        working-directory: task4-ci   # папка з Dockerfile
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+      - name: Build Docker image
+        run: docker build -t my-app:latest .

@@ -1,0 +1,11 @@
+# Звіти та скриншоти не потрібні в репозиторії
+*.docx
+screenshots/
+# Службові файли Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+devops_iac_output.txt
+# Допоміжні скрипти
+run_task*.bat
+run_task*.ps1
